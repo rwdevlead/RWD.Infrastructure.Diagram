@@ -1,0 +1,133 @@
+# =========================
+# Local Notes
+# =========================
+prompts/
+
+# =========================
+# SQLite
+# =========================
+*.db
+!seed.db
+*.db3
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# SQLite temporary files
+*.tmp
+*~
+
+# =========================
+# .NET API
+# =========================
+
+# Build output
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+[Bb]in/
+[Oo]bj/
+artifacts/
+publish/
+
+# Platform builds
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+# Logs
+[Ll]og/
+[Ll]ogs/
+.binlog
+[Bb]uild[Ll]og.
+
+# Test results & coverage
+[Tt]est[Rr]esult*/
+TestResults/
+CodeCoverage/
+coverage/
+*.coverage
+.coveragexml
+TestResult.xml
+nunit-.xml
+*.VisualState.xml
+
+# Legacy .NET files
+project.lock.json
+project.fragment.lock.json
+
+# NuGet packages
+*.nupkg
+*.snupkg
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# =========================
+# React / Vite
+# =========================
+
+# Dependencies
+
+node_modules/
+.pnp/
+.pnp.js
+
+# Build output
+
+dist/
+build/
+out/
+.vite/
+
+# Coverage
+
+coverage/
+
+# Logs
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# =========================
+# Environment Files
+# =========================
+
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# =========================
+# IDEs
+# =========================
+
+.vscode/
+!.vscode/extensions.json
+
+.idea/
+
+.ntvs
+*.njsproj
+*.sw?
+
+# =========================
+# Operating System Files
+# =========================
+
+.DS_Store
+Thumbs.db
