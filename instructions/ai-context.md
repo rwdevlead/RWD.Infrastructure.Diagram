@@ -8,7 +8,7 @@
   - SQLite persistence.
   - Docker-first deployment.
 - **Architecture Summary**: Clean Architecture with DDD-lite patterns, utilizing the Repository Pattern and REST APIs, delivered via a single Docker image containing both frontend and backend.
-- **Current Status**: Initial solution structure (Clean Architecture) created for .NET 10. Verification build succeeds under dotnet CLI (10.0.301). Core domain entities and interfaces have been defined. Docker configuration (Dockerfile and docker-compose.yml) and editorconfig are in place.
+- **Current Status**: Backend is complete. React Vite frontend is complete with all primary inventory CRUD pages (Hardware, Virtual Machines, Services/Apps, Storage Pools, Network Shares, Networks/VLANs, and Documentation Wiki) and the interactive Cytoscape network diagram fully implemented. All projects build with 0 errors.
 
 # Technical Stack
 
@@ -73,10 +73,10 @@ Entities inherit from `BaseEntity` (Id, CreatedAt, UpdatedAt):
 # APIs
 
 All endpoints return unified wrappers `{"data": ...}` or `{"error": ...}` to maintain frontend parity.
-- System check: `GET /api/health`
+- System check: `GET /health`
 - Inventory export/import: `GET /api/inventory/export`, `POST /api/inventory/import`
 - Inventory search: `GET /api/inventory/search?q=...`
-- Resource groups: `/api/hardware`, `/api/vms`, `/api/apps`, `/api/storage`, `/api/shares`, `/api/networks`, `/api/misc`, `/api/documents`
+- Resource groups: `/api/hardware`, `/api/vms`, `/api/apps`, `/api/storage`, `/api/shares`, `/api/networks`, `/api/network-members`, `/api/documents`
 - Map details: `/api/map/layout`, `/api/map/relationships`
 
 # Infrastructure
@@ -84,6 +84,7 @@ All endpoints return unified wrappers `{"data": ...}` or `{"error": ...}` to mai
 - SQLite DB location: `/data/homelab-hub.db` or customized via environment variable `DATABASE_URL`.
 - Development is configured through `launchSettings.json` and `.editorconfig`.
 - Production runtime is defined in the workspace `Dockerfile`.
+- A root [Makefile](file:///Users/ka8kgj/Documents/Source/RWD.Infrastructure.Diagram/Makefile) is provided to orchestrate dotnet backend runs, React frontend execution, and Docker/docker-compose commands.
 
 # Development Standards
 
@@ -98,7 +99,8 @@ All endpoints return unified wrappers `{"data": ...}` or `{"error": ...}` to mai
 
 # Lessons Learned
 
-- None recorded yet.
+- **TypeScript Config**: Ensure `tsconfig.json` and `tsconfig.node.json` are present in custom Vite-scaffolded directories so compilation commands (`tsc`) execute properly.
+- **Cytoscape Typings**: Set return type of cytoscape stylesheet configuration to `any[]` or `cytoscape.StylesheetStyle[]` to ensure clean compilation when using custom selectors.
 
 # Open Questions
 
@@ -108,4 +110,7 @@ All endpoints return unified wrappers `{"data": ...}` or `{"error": ...}` to mai
 
 - **2026-06-22**: Ported solution setup to .NET 10, configured Docker, created Clean Architecture project structures, and defined domain models and repositories.
 - **2026-06-22**: Implemented EF Core SQLite persistence including AppDbContext, generic Repository, and UnitOfWork in Infrastructure. Set up a design-time migrations factory, added SQLite directory validation and startup migrations in Api project, and generated the InitialCreate database migration.
-
+- **2026-06-29**: Scaffolded the React (Vite) frontend: routing, layout shell with responsive SVG sidebar, Axios API client (proxied to backend), Zustand state store, global Vanilla CSS dark-theme design system, Hardware CRUD page, and Settings JSON backup/restore page. Build verified clean.
+- **2026-06-29**: Implemented all remaining core inventory CRUD pages: Virtual Machines (host dropdown), Services/Apps (HTTPS toggle, URL links), Storage Pools (filesystem/RAID dropdowns), Networks/VLANs (colour swatch picker, CIDR), and Documentation Wiki (hierarchical tree, ReactMarkdown renderer). CSS updated with dark select styles and full markdown typography. Build verified: 274 modules, 0 errors.
+- **2026-06-29**: Implemented the Network Shares standalone CRUD inventory page (SMB/NFS protocol support) and wired its route and sidebar links. Implemented the interactive network topology map using Cytoscape.js, featuring draggable and auto-saved node layouts, multiple layout configurations, legendary filters, zoom controls, and a node properties details pane. Verified build builds cleanly with 0 compilation errors.
+- **2026-06-29**: Added a root [Makefile](file:///Users/ka8kgj/Documents/Source/RWD.Infrastructure.Diagram/Makefile) to support dotnet development runs, react dev client execution, and Docker container orchestration.
